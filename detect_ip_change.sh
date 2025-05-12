@@ -13,10 +13,10 @@ while true; do
         current_ip_time="$(date +%s)"
         delta=$((current_ip_time-past_ip_time))
         sec=$((delta%60))
-        min=$((delta/60))
-        hour=$((delta/60/60))
-        days=$((delta/60/60/24))
-        echo "$days:$hour:$min:$sec - $a" >> change.log
+        min=$((delta/60%60))
+        hour=$((delta/60/60%60))
+        days=$((delta/60/60/24%60))
+        echo "$days days $hour:$min:$sec - $a" >> $daemon_logs/change.log
         echo "$b" > $daemon_logs/file.log
         echo "$current_ip_time" > $daemon_logs/time.log
         echo "Not equals!"
